@@ -27,6 +27,21 @@ public:
 		top += y;
 	}
 	
+	void zoom(double z) {
+		double new_width = width / z;
+		double new_height = height / z;
+		double mx = (width - new_width) / 2;
+		double my = (height - new_height) / 2;
+		
+		left += mx;
+		right -= mx;
+		bottom += my;
+		top -= my;
+		
+		width = new_width;
+		height = new_height;
+	}
+	
 	
 	double toScreenX(double x) {
 		double rx = x - left;

@@ -62,11 +62,19 @@ void specialKeyUp(int key, int x, int y) {
 	state::specialKeyStates[key] = false;
 }
 
-void mouseClick(int button, int state, int x, int y) {
-	state::mouseStates[button] = !state;
+void mouseClick(int button, int action, int x, int y) {
+	state::mouseStates[button] = !action;
+	
+	if (button == 4) {
+		state::view.zoom(1.25);
+	} else if (button == 3) {
+		state::view.zoom(0.8);
+	}
 	
 	state::mouse_x = x;
 	state::mouse_y = state::height - y;
+	
+	glutPostRedisplay();
 }
 
 void mouseMotion(int x, int y) {

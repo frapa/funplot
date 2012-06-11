@@ -18,7 +18,14 @@ long_line_behaviour=1
 long_line_column=79
 
 [files]
-current_page=0
+current_page=6
+FILE_NAME_0=0;C++;0;16;1;1;1;/home/francesco/Programming/C++/opengl/funplot/funplot/funplot.cpp;0;4
+FILE_NAME_1=0;C++;0;16;1;1;1;/home/francesco/Programming/C++/opengl/funplot/funplot/src/vars.hpp;0;4
+FILE_NAME_2=1798;C++;0;16;1;1;1;/home/francesco/Programming/C++/opengl/funplot/funplot/src/opengl.hpp;0;4
+FILE_NAME_3=0;C++;0;16;1;1;1;/home/francesco/Programming/C++/opengl/funplot/funplot/src/drawing_functions.hpp;0;4
+FILE_NAME_4=0;C++;0;16;1;1;1;/home/francesco/Programming/C++/opengl/funplot/funplot/src/interface.hpp;0;4
+FILE_NAME_5=0;C++;0;16;1;1;1;/home/francesco/Programming/C++/opengl/funplot/funplot/src/math.hpp;0;4
+FILE_NAME_6=727;C++;0;16;1;1;1;/home/francesco/Programming/C++/opengl/funplot/funplot/src/view.hpp;0;4
 
 [build-menu]
 NF_00_LB=_Make

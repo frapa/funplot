@@ -1,10 +1,13 @@
 #ifndef DRAWING
 #define DRAWING
 
+#include <sstream>
 #include "vars.hpp"
 #include "math.hpp"
 
 void renderGrid() {
+	std::stringstream converter;
+	
 	// render major lines if depth > 1
 	if (state::depth > 1) {
 		glColor4f(0.9, 0.9, 0.9, 1.0);
@@ -20,6 +23,42 @@ void renderGrid() {
 				glVertex2f(state::width, state::view.toScreenY(y));
 			}
 		glEnd();
+		
+		// print numbers	
+		glColor4f(0.3, 0.3, 0.3, 1.0);
+		for (int x = state::view.left; x <= int(state::view.right); ++x) {
+			if (x != 0) {
+				converter.clear();
+				converter << x;
+				std::string num_text;
+				converter >> num_text;
+				
+				// get box of the text
+				FTBBox box = state::normal_font->BBox(num_text.c_str());
+				// adjust positioning
+				FTPoint point(state::view.toScreenX(x) - box.Upper().X()/2.0,
+					state::view.toScreenY(0) - box.Upper().Y() - 3);
+				// display the number
+				state::normal_font->Render(num_text.c_str(), -1, point);
+			}
+		}
+		
+		for (int y = state::view.bottom; y <= int(state::view.top); ++y) {
+			if (y != 0) {
+				converter.clear();
+				converter << y;
+				std::string num_text;
+				converter >> num_text;
+				
+				// get box of the text
+				FTBBox box = state::normal_font->BBox(num_text.c_str());
+				// adjust positioning
+				FTPoint point(state::view.toScreenX(0) - box.Upper().X() - 5,
+					state::view.toScreenY(y) - box.Upper().Y()/2);
+				// display the number
+				state::normal_font->Render(num_text.c_str(), -1, point);
+			}
+		}
 	}
 	
 	// render axes (light gray)
@@ -34,6 +73,13 @@ void renderGrid() {
 		glVertex2f(state::view.toScreenX(0), 0);
 		glVertex2f(state::view.toScreenX(0), state::height);
 	glEnd();
+	
+	// print 0
+	glColor4f(0.3, 0.3, 0.3, 1.0);
+	FTBBox box = state::normal_font->BBox("0");
+	FTPoint point(state::view.toScreenX(0) - box.Upper().X() - 5,
+		state::view.toScreenY(0) - box.Upper().Y() - 3);
+	state::normal_font->Render("0", -1, point);
 }
 
 void renderFunction() {

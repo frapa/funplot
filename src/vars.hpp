@@ -2,6 +2,7 @@
 #define VARS
 
 #include <vector>
+#include <FTGL/ftgl.h>
 #include "view.hpp"
 
 /* This files defines global variables which affects the behavior of all
@@ -34,6 +35,8 @@ namespace state {
 	
 	// set every how many pixels the program should plot the functions
 	int step = 2;
+	
+	FTFont* normal_font;
 }
 
 #endif

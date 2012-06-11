@@ -4,6 +4,8 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 
+#include <FTGL/ftgl.h>
+
 // fparser header for math functions evaluation
 #include "fparser/fparser.hh"
 
@@ -36,6 +38,11 @@ int main (int argc, char **argv) {
 	glutSpecialFunc(specialKeyDown);
 	glutSpecialUpFunc(specialKeyUp);
 	
+	// init fonts
+	state::normal_font = new FTGLTextureFont("./fonts/Inconsolata.otf");
+	state::normal_font->FaceSize(16);
+	
+	// init functions
 	state::functions.push_back(new Function(argv[1]));
 	
 	glutMainLoop(); // start mainloop
