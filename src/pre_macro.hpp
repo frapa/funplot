@@ -1,0 +1,1 @@
+#define OUT_OF_DOMAIN_ERROR 123
