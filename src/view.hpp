@@ -77,11 +77,12 @@ public:
 		return toYScale(y) + bottom;
 	}
 	
-	double getZoom() {
-		double scale_x = screen_width / width;
-		double scale_y = screen_height / height;
-		
-		return scale_x * scale_y;
+	double getScaleX() {
+		return screen_width / width;
+	}
+	
+	double getScaleY() {
+		return screen_height / height;
 	}
 };
 

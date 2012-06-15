@@ -47,6 +47,14 @@ void reshape (int new_width, int new_height) {
 }
 
 void keyDown(unsigned char key, int x, int y) {
+	int mod = glutGetModifiers();
+	
+	if (key == 'z') {
+		state::points.clear();
+		state::command = 10; // stands for find a zero
+		state::get_points = 2;
+	}
+	
 	state::keyStates[key] = true;
 }
 
@@ -65,7 +73,14 @@ void specialKeyUp(int key, int x, int y) {
 void mouseClick(int button, int action, int x, int y) {
 	state::mouseStates[button] = !action;
 	
-	if (button == 4) {
+	if (button == 0 and action == GLUT_UP) {
+		// if points have to be taken for the current command
+		// save this point
+		if (state::get_points != 0) {
+			state::points.push_back(state::view.toPlaneX(x));
+			state::get_points -= 1;
+		}
+	} else if (button == 4) {
 		state::view.zoom(1.25);
 	} else if (button == 3) {
 		state::view.zoom(0.8);
@@ -73,6 +88,24 @@ void mouseClick(int button, int action, int x, int y) {
 	
 	state::mouse_x = x;
 	state::mouse_y = state::height - y;
+	
+	// find out whether an action should be taken
+	if (state::get_points == 0) {
+		// if the user want to calculare the zero of the function
+		if (state::command == 10) {
+			if (state::functions[0]->zero(state::points[0], state::points[1]) < state::points[0]) {
+				std::cout << "No solution between " << state::points[0] << " and "
+					<< state::points[1] << std::endl;
+			} else {
+				std::cout.precision(10);
+				std::cout <<
+					"The solution between " << state::points[0] << " and " << state::points[1] <<
+					" is: " << state::functions[0]->zero(state::points[0], state::points[1])
+					<< std::endl;
+			}
+			state::command = 0;
+		}
+	}
 	
 	glutPostRedisplay();
 }

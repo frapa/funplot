@@ -1,4 +1,5 @@
 #include <iostream>
+#include <exception>
 
 // opengl headers
 #include <GL/glew.h>
@@ -10,11 +11,13 @@
 #include "fparser/fparser.hh"
 
 // internal headers
+#include "src/pre_macro.hpp"
+#include "src/math.hpp"
 #include "src/vars.hpp"
+#include "src/math.hpp"
 #include "src/opengl.hpp"
 #include "src/drawing_functions.hpp"
 #include "src/interface.hpp"
-#include "src/math.hpp"
 
 int main (int argc, char **argv) {
 	glutInit(&argc, argv);
